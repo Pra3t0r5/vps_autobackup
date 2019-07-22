@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<!-- saved from url=(0098)https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/ -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+    
+	
+	<meta name="viewport" content="width=device-width; initial-scale=1">    
+    <title>How to set up a VirtualBox server in Debian 9: web interface, autostart, backup | Vorkbaard uit de toekomst</title>
+	
+	<link rel="pingback" href="https://vorkbaard.nl/xmlrpc.php">
+	
+	<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title="Vorkbaard uit de toekomst » Feed" href="https://vorkbaard.nl/feed/">
+<link rel="alternate" type="application/rss+xml" title="Vorkbaard uit de toekomst » Comments Feed" href="https://vorkbaard.nl/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Vorkbaard uit de toekomst » How to set up a VirtualBox server in Debian 9: web interface, autostart, backup Comments Feed" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/feed/">
+		<script async="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/analytics.js"></script><script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/vorkbaard.nl\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.2.2"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/wp-emoji-release.min.js" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="biotodoma_style-css" href="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/style.css" type="text/css" media="all">
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/jquery.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/external-tracking.min.js"></script>
+<link rel="https://api.w.org/" href="https://vorkbaard.nl/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://vorkbaard.nl/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://vorkbaard.nl/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="The Wandering Earth, door Cixin Liu" href="https://vorkbaard.nl/the-wandering-earth-door-cixin-liu/">
+<link rel="next" title="Dichronauts, door Greg Egan" href="https://vorkbaard.nl/dichronauts-door-greg-egan/">
+<meta name="generator" content="WordPress 5.2.2">
+<link rel="canonical" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/">
+<link rel="shortlink" href="https://vorkbaard.nl/?p=3832">
+<link rel="alternate" type="application/json+oembed" href="https://vorkbaard.nl/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fvorkbaard.nl%2Fhow-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://vorkbaard.nl/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fvorkbaard.nl%2Fhow-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup%2F&amp;format=xml">
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<link rel="stylesheet" type="text/css" href="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shCore.css"><link rel="stylesheet" type="text/css" href="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shThemeDefault.css"><style type="text/css" id="syntaxhighlighteranchor"></style>
+<link rel="icon" href="https://vorkbaard.nl/wp-content/uploads/2015/10/cropped-icon-32x32.png" sizes="32x32">
+<link rel="icon" href="https://vorkbaard.nl/wp-content/uploads/2015/10/cropped-icon-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon-precomposed" href="https://vorkbaard.nl/wp-content/uploads/2015/10/cropped-icon-180x180.png">
+<meta name="msapplication-TileImage" content="https://vorkbaard.nl/wp-content/uploads/2015/10/cropped-icon-270x270.png">
+<!-- Google Analytics Tracking by Google Analyticator 6.5.4: http://www.videousermanuals.com/google-analyticator/ -->
+<script type="text/javascript">
+    var analyticsFileTypes = [''];
+    var analyticsSnippet = 'disabled';
+    var analyticsEventTracking = 'enabled';
+</script>
+<script type="text/javascript">
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-76734818-1', 'auto');
+ 
+	ga('send', 'pageview');
+</script>
+ 
+<script async="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/f.txt"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6462861553316745",
+    enable_page_level_ads: true
+  });
+</script>
+</head>
+
+<body class="post-template-default single single-post postid-3832 single-format-standard">
+<div class="hide">
+	<p><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#content">Skip to Content</a></p></div><!--.hide-->
+
+	<div id="header">
+		<div id="header-information">
+			<div id="title">
+									<h2 id="logo"><a href="https://vorkbaard.nl/" title="Kapitein Vorkbaard to the rescue!">Vorkbaard uit de toekomst</a></h2>
+					<h3 id="tagline">Kapitein Vorkbaard to the rescue!</h3>
+							</div><!--#title-->
+			
+    <div id="access">
+    <div class="menu-header"><ul id="menu-menu" class="menu"><li id="menu-item-177" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-177"><a href="https://vorkbaard.nl/">Ahoy, maatjes!</a></li>
+<li id="menu-item-186" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-186"><a href="https://vorkbaard.nl/category/taal/">Taal</a></li>
+<li id="menu-item-407" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-407"><a href="https://vorkbaard.nl/scifi/">Scifi</a></li>
+<li id="menu-item-188" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-188"><a href="https://vorkbaard.nl/category/tech/">Tech</a></li>
+<li id="menu-item-189" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-189"><a href="https://vorkbaard.nl/category/twitter/">Twitter</a></li>
+</ul></div>    </div><!-- #access -->
+
+</div><!--#header-information-->
+
+			
+	
+	</div><!--#header-->
+    
+    <div class="clear bottom-header"><div class="bg-image-bottom-header"></div></div><!-- needed for the shadow part -->	
+    
+<div id="main"><!-- this encompasses the entire Web site -->    
+	<div class="container">
+<div id="content">
+	
+	
+			<div id="post-3832" class="post post-3832 type-post status-publish format-standard hentry category-tech tag-automatically tag-autostart tag-backup tag-phpvirtualbox tag-reboot tag-service tag-shutdown tag-systemd tag-unit tag-vbox tag-vboxweb tag-vboxwebsrv tag-virtualbox tag-web-if tag-web-interface tag-webif tag-webinterface">
+
+
+			<div id="nav-above" class="navigation">
+				<div class="nav-previous"><a href="https://vorkbaard.nl/the-wandering-earth-door-cixin-liu/" rel="prev">« The Wandering Earth, door Cixin Liu</a></div>
+				<div class="nav-next"><a href="https://vorkbaard.nl/dichronauts-door-greg-egan/" rel="next">Dichronauts, door Greg Egan »</a></div>
+			</div>
+
+			<article>
+				<h1><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/" title="How to set up a VirtualBox server in Debian 9: web interface, autostart, backup" rel="bookmark">How to set up a VirtualBox server in Debian 9: web interface, autostart, backup</a></h1>
+				
+				<div class="post-writer">
+					<p>
+						Written on <a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/" title="How to set up a VirtualBox server in Debian 9: web interface, autostart, backup" rel="bookmark">February 9, 2018 at 06:16</a>, 						 						by <a href="https://vorkbaard.nl/author/vorkbaard/" title="Posts by Kapitein Vorkbaard" rel="author">Kapitein Vorkbaard</a>					</p>
+				</div>
+				
+												
+                
+                
+                
+                <div class="post-content">
+					<p>This article describes how to set up a VirtualBox server in Debian 9 (Stretch):</p>
+<ol>
+<li><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#installingvirtualbox">Installing VirtualBox</a></li>
+<li><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#phpvirtualbox">VirtualBox web interface: phpVirtualBox</a></li>
+<li><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#vms">Set up and use VMs</a></li>
+<li><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#webifonboot">Automatically start PhpVirtualBox on boot</a></li>
+<li><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#autostartvm">Automatically pause VMs on reboot/shutdown and resume them on boot</a></li>
+<li><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#backup">Set up a backup system</a></li>
+<li><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#troubleshoot">Troubleshooting</a></li>
+</ol>
+<hr><em>If this article has helped you please let me know by clicking some of the ads on this page. If you’re really euphoric there’s a donation button on the right ;) Thanks!<p></p>
+<hr></em><p></p>
+<p><strong>Versions</strong><br>
+ – Debian 9.3 (Stretch)<br>
+ – VirtualBox 5.2<br>
+ – phpVirtualBox 5.0.5</p>
+<p><strong>Assumptions</strong><br>
+You have an up-to-date Debian 9 server with a working internet connection.</p>
+<p></p>
+<p>
+<br>
+<a name="installingvirtualbox"></a></p>
+<h2>Installing VirtualBox</h2>
+<p>Create a file <strong>/etc/apt/sources.list.d/virtualbox.list</strong> and add:</p>
+<div><div id="highlighter_16090" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">deb <a href="http://download.virtualbox.org/virtualbox/debian">http://download.virtualbox.org/virtualbox/debian</a> stretch contrib</code></div></div></td></tr></tbody></table></div></div>
+<p>Check <a href="https://www.virtualbox.org/wiki/Linux_Downloads" rel="noopener" target="_blank">here</a> which key you need (opens in a new tab). At the time of writing this is oracle_vbox_2016.asc. Download and install the key so apt doesn’t complain when using the source:</p>
+<div><div id="highlighter_749224" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">wget <a href="https://www.virtualbox.org/download/oracle_vbox_2016.asc">https://www.virtualbox.org/download/oracle_vbox_2016.asc</a> -O- | apt-key add -</code></div></div></td></tr></tbody></table></div></div>
+<p>Update sources:</p>
+<div><div id="highlighter_975778" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># aptitude update</code></div></div></td></tr></tbody></table></div></div>
+<p>Check which version of VirtualBox is current:</p>
+<div><div id="highlighter_529418" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">root@vorkian:/etc/apt/sources.list.d# aptitude search virtualbox</code></div><div class="line number2 index1 alt1"><code class="plain plain">v&nbsp;&nbsp; virtualbox&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -</code></div><div class="line number3 index2 alt2"><code class="plain plain">p&nbsp;&nbsp; virtualbox-5.0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Oracle VM VirtualBox</code></div><div class="line number4 index3 alt1"><code class="plain plain">p&nbsp;&nbsp; virtualbox-5.1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Oracle VM VirtualBox</code></div><div class="line number5 index4 alt2"><code class="plain plain">p&nbsp;&nbsp; virtualbox-5.2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Oracle VM VirtualBox</code></div></div></td></tr></tbody></table></div></div>
+<p>Unless you have a reason to install an older version, install the most current:</p>
+<div><div id="highlighter_318441" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># aptitude install VirtualBox-5.2</code></div></div></td></tr></tbody></table></div></div>
+<p>During installation VirtualBox will inform you it needs some more bits:</p>
+<div><div id="highlighter_973812" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">This system is currently not set up to build kernel modules.</code></div><div class="line number2 index1 alt1"><code class="plain plain">Please install the Linux kernel "header" files matching the current kernel</code></div><div class="line number3 index2 alt2"><code class="plain plain">for adding new hardware support to the system.</code></div><div class="line number4 index3 alt1"><code class="plain plain">The distribution packages containing the headers are probably:</code></div><div class="line number5 index4 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">linux-headers-amd64 linux-headers-4.9.0-3-amd64</code></div><div class="line number6 index5 alt1"><code class="plain plain">This system is currently not set up to build kernel modules.</code></div><div class="line number7 index6 alt2"><code class="plain plain">Please install the Linux kernel "header" files matching the current kernel</code></div><div class="line number8 index7 alt1"><code class="plain plain">for adding new hardware support to the system.</code></div><div class="line number9 index8 alt2"><code class="plain plain">The distribution packages containing the headers are probably:</code></div><div class="line number10 index9 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">linux-headers-amd64 linux-headers-4.9.0-3-amd64</code></div><div class="line number11 index10 alt2">&nbsp;</div><div class="line number12 index11 alt1"><code class="plain plain">There were problems setting up VirtualBox.&nbsp; To re-start the set-up process, run /sbin/vboxconfig</code></div></div></td></tr></tbody></table></div></div>
+<p>Let’s install them:</p>
+<div><div id="highlighter_404581" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># aptitude install linux-headers-amd64 linux-headers-4.9.0-3-amd64</code></div></div></td></tr></tbody></table></div></div>
+<p>Check the recommendation (“The distribution packages containing the headers are probably:” etc.) for the actual packages you need to install.</p>
+<p>Rerun the VirtualBox configuration, as instructed:</p>
+<div><div id="highlighter_226960" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># vboxconfig</code></div></div></td></tr></tbody></table></div></div>
+<p><strong>Extension pack</strong><br>
+Check <a href="https://www.virtualbox.org/wiki/Downloads" rel="noopener" target="_blank">here</a> what url you should use for the latest extension pack.</p>
+<div><div id="highlighter_650403" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># wget <a href="https://download.virtualbox.org/virtualbox/5.2.6/Oracle_VM_VirtualBox_Extension_Pack-5.2.6-120293.vbox-extpack">https://download.virtualbox.org/virtualbox/5.2.6/Oracle_VM_VirtualBox_Extension_Pack-5.2.6-120293.vbox-extpack</a></code></div></div></td></tr></tbody></table></div></div>
+<p>Install the extension pack:</p>
+<div><div id="highlighter_294571" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.6-120293.vbox-extpack</code></div></div></td></tr></tbody></table></div></div>
+<p>Set up an account for VirtualBox so it doesn’t run as root. If you have multiple users with their own VMs that’s ok too.</p>
+<div><div id="highlighter_775600" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># useradd -d /home/vbox -m -g vboxusers -s /bin/bash vbox</code></div><div class="line number2 index1 alt1"><code class="plain plain"># passwd vbox</code></div></div></td></tr></tbody></table></div></div>
+<p>Remember the password, you’ll need it later on.</p>
+<p><a name="phpvirtualbox"></a></p>
+<h2>VirtualBox web interface: phpVirtualBox</h2>
+<p>Tell the system which user the web service will run as. In <strong>/etc/default/virtualbox</strong> add:</p>
+<div><div id="highlighter_852962" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">VBOXWEB_USER=vbox</code></div><div class="line number2 index1 alt1"><code class="plain plain">VBOXWEB_HOST=127.0.0.1</code></div></div></td></tr></tbody></table></div></div>
+<p>Start the vboxweb service <em>as the dedicated user</em>:</p>
+<div><div id="highlighter_617914" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># sudo -u vbox vboxwebsrv --background</code></div></div></td></tr></tbody></table></div></div>
+<p><strong>Install webserver and dependencies</strong></p>
+<div><div id="highlighter_957397" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># aptitude install apache2 php php-soap php-xml unzip</code></div></div></td></tr></tbody></table></div></div>
+<p>Note: it would go too far to talk about web server security here. You will understand that it is important for internet facing (and any other) servers to have decent security. If you’re building an internet facing production server you must implement supplemental security, otherwise you <em>will</em> find your servers compromised.</p>
+<p>Download phpVirtualBox:</p>
+<div><div id="highlighter_561199" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># cd /var/www/html</code></div><div class="line number2 index1 alt1"><code class="plain plain"># wget <a href="http://sourceforge.net/projects/phpvirtualbox/files/latest/download">http://sourceforge.net/projects/phpvirtualbox/files/latest/download</a> -O phpvirtualbox.zip</code></div><div class="line number3 index2 alt2"><code class="plain plain"># unzip phpvirtualbox.zip</code></div></div></td></tr></tbody></table></div></div>
+<p>If you can’t unzip phpvirtualbox.zip try different SourceForge mirrors. The German ones tend to work well for me.</p>
+<p>Rename the folder for easier typing:</p>
+<div><div id="highlighter_586544" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># mv phpvirtualbox-5.0-5/ phpvirtualbox</code></div></div></td></tr></tbody></table></div></div>
+<p>Change into the phpVirtualBox folder and copy the initial config file:</p>
+<div><div id="highlighter_100405" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># cd /var/www/html/phpvirtualbox/</code></div><div class="line number2 index1 alt1"><code class="plain plain"># cp config.php-example config.php</code></div></div></td></tr></tbody></table></div></div>
+<p>Open up the config file and add the vboxweb service credentials. In <strong>/var/www/html/phpvirtualbox/config.php</strong> change:</p>
+<div><div id="highlighter_21900" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">var $username = 'vbox';</code></div><div class="line number2 index1 alt1"><code class="plain plain">var $password = 'P@55w0rd';</code></div></div></td></tr></tbody></table></div></div>
+<p>…Using the password you entered for the vbox user earlier.</p>
+<p>Point your browser to <strong>http://yourserver/phpvirtualbox</strong> (use your own server name or IP address). The default credentials are admin/admin.</p>
+<p><strong>Optional: work around a version notification</strong><br>
+At the time of writing phpVirtualBox and VirtualBox itself are not at the same version. PhpVirtualBox will complain about this but we can work around it. Note that this verion incongruity may result in unexpected behaviour and it’s best to keep an eye out for new versions.</p>
+<p>In <strong>/var/www/html/phpvirtualbox/endpoints/lib/config.php</strong> change:</p>
+<div><div id="highlighter_134971" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">define('PHPVBOX_VER', '5.0-0');</code></div></div></td></tr></tbody></table></div></div>
+<p>to</p>
+<div><div id="highlighter_466882" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">define('PHPVBOX_VER', '5.2-0');</code></div></div></td></tr></tbody></table></div></div>
+<p>or the current version if later than 5.2.</p>
+<p>For the wsdl file create a symlink with the same name:</p>
+<div><div id="highlighter_729263" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">ln -s /var/www/html/phpvirtualbox/endpoints/lib/vboxwebService-5.0.wsdl /var/www/html/phpvirtualbox/endpoints/lib/vboxwebService-5.2.wsdl</code></div></div></td></tr></tbody></table></div></div>
+<p>This will stop the version complaints. It should work immediately; no need to restart anything.</p>
+<p><a name="vms"></a></p>
+<h2>Set up and use VMs</h2>
+<p>Use the VirtualBox web interface to set up a virtual machine like you would with the GUI version.</p>
+<p><a href="https://vorkbaard.nl/wp-content/uploads/2018/01/vbox-deb9-01.png" target="_blank"><img src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/vbox-deb9-01-300x197.png" alt="" width="300" height="197" class="aligncenter size-medium wp-image-3839" srcset="https://vorkbaard.nl/wp-content/uploads/2018/01/vbox-deb9-01-300x197.png 300w, https://vorkbaard.nl/wp-content/uploads/2018/01/vbox-deb9-01-768x506.png 768w, https://vorkbaard.nl/wp-content/uploads/2018/01/vbox-deb9-01-1024x674.png 1024w, https://vorkbaard.nl/wp-content/uploads/2018/01/vbox-deb9-01.png 1030w" sizes="(max-width: 300px) 100vw, 300px"></a></p>
+<p>Once you start it you can connect to it using an RDP session to your <em>server’s</em> host name or IP address on the port defined in the VM’s settings, 9000 by default.</p>
+<p>My Debian VirtualBox server has IP address 172.21.135.36. On my Windows 10 box I connect to my Kubuntu VM with:</p>
+<div><div id="highlighter_549355" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">mstsc /v:172.21.135.36:9000</code></div></div></td></tr></tbody></table></div></div>
+<p>Note that you are <em>not</em> connecting to the VM’s address. You are connecting to the <em>server’s</em> address.</p>
+<p><a href="https://vorkbaard.nl/wp-content/uploads/2018/01/vbox-deb9-02.png" target="_blank"><img src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/vbox-deb9-02-300x176.png" alt="" width="300" height="176" class="aligncenter size-medium wp-image-3840" srcset="https://vorkbaard.nl/wp-content/uploads/2018/01/vbox-deb9-02-300x176.png 300w, https://vorkbaard.nl/wp-content/uploads/2018/01/vbox-deb9-02-768x450.png 768w, https://vorkbaard.nl/wp-content/uploads/2018/01/vbox-deb9-02-1024x601.png 1024w, https://vorkbaard.nl/wp-content/uploads/2018/01/vbox-deb9-02.png 1282w" sizes="(max-width: 300px) 100vw, 300px"></a></p>
+<p><a name="webifonboot"></a></p>
+<h2>Automatically start PhpVirtualBox on boot</h2>
+<p>Since we’re running VirtualBox with a dedicated user we need to tell VirtualBox web service to use that account: in <strong>/etc/systemd/system/multi-user.target.wants/vboxweb-service.service</strong>, under the [Service] part, add the following:</p>
+<div><div id="highlighter_607879" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">User=vbox</code></div><div class="line number2 index1 alt1"><code class="plain plain">Group=vboxusers</code></div></div></td></tr></tbody></table></div></div>
+<p>The whole file should look like this:</p>
+<div><div id="highlighter_799578" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">[Unit]</code></div><div class="line number2 index1 alt1"><code class="plain plain">SourcePath=/usr/lib/virtualbox/vboxweb-service.sh</code></div><div class="line number3 index2 alt2"><code class="plain plain">Description=</code></div><div class="line number4 index3 alt1"><code class="plain plain">Before=runlevel2.target runlevel3.target runlevel4.target runlevel5.target shutdown.target</code></div><div class="line number5 index4 alt2"><code class="plain plain">After=vboxdrv.service</code></div><div class="line number6 index5 alt1"><code class="plain plain">Conflicts=shutdown.target</code></div><div class="line number7 index6 alt2">&nbsp;</div><div class="line number8 index7 alt1"><code class="plain plain">[Service]</code></div><div class="line number9 index8 alt2"><code class="plain plain">User=vbox</code></div><div class="line number10 index9 alt1"><code class="plain plain">Group=vboxusers</code></div><div class="line number11 index10 alt2"><code class="plain plain">Type=forking</code></div><div class="line number12 index11 alt1"><code class="plain plain">Restart=no</code></div><div class="line number13 index12 alt2"><code class="plain plain">TimeoutSec=5min</code></div><div class="line number14 index13 alt1"><code class="plain plain">IgnoreSIGPIPE=no</code></div><div class="line number15 index14 alt2"><code class="plain plain">KillMode=process</code></div><div class="line number16 index15 alt1"><code class="plain plain">GuessMainPID=no</code></div><div class="line number17 index16 alt2"><code class="plain plain">RemainAfterExit=yes</code></div><div class="line number18 index17 alt1"><code class="plain plain">ExecStart=/usr/lib/virtualbox/vboxweb-service.sh start</code></div><div class="line number19 index18 alt2"><code class="plain plain">ExecStop=/usr/lib/virtualbox/vboxweb-service.sh stop</code></div><div class="line number20 index19 alt1">&nbsp;</div><div class="line number21 index20 alt2"><code class="plain plain">[Install]</code></div><div class="line number22 index21 alt1"><code class="plain plain">WantedBy=multi-user.target</code></div></div></td></tr></tbody></table></div></div>
+<p>Reboot the server and verify PhpVirtualBox is started afterwards or just do</p>
+<div><div id="highlighter_363981" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># systemctl daemon-reload</code></div></div></td></tr></tbody></table></div></div>
+<p>for good measure.</p>
+<p><a name="autostartvm"></a></p>
+<h2>Automatically pause VMs on reboot/shutdown and resume them on boot</h2>
+<p>I would like my VMs to be automatically paused (‘status=saved’ in VirtualBox’s verbage) when I reboot or shutdown my server. It would also be nice if the VMs in question were automatically resumed when the server is back up. We can do that within Systemd.</p>
+<p>We’ll create two scripts: one to pause VMs and one to restart them. Then call them from a Systemd unit. Note that you need to save the pause and restart scripts in a location where the vbox user can reach and execute them. From the unit file we’ll need the vbox user to execute them.</p>
+<p>Which VMs do we pause? The ones that are running and the ones that are paused because paused VMs’ states wouldn’t survive a reboot. Which VMs do we resume? Just the ones that were running, not the ones that were paused, because we want the new overall state to resemble the old one as closely as possible (i.e. we do not want paused VMs to be suddenly running, so it’s better to keep them saved than running).</p>
+<p>In <strong>/home/vbox/pausevms.sh</strong>:</p>
+<div><div id="highlighter_413301" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">#!/bin/bash</code></div><div class="line number2 index1 alt1"><code class="plain plain"># Pause running VMs</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="plain plain">STATUSFILE=/home/vbox/vm-status</code></div><div class="line number5 index4 alt2"><code class="plain plain"># Clear the previous status file if it exists</code></div><div class="line number6 index5 alt1"><code class="plain plain">if [ -e $STATUSFILE ]; then rm $STATUSFILE; fi</code></div><div class="line number7 index6 alt2">&nbsp;</div><div class="line number8 index7 alt1"><code class="plain plain"># List all VMs</code></div><div class="line number9 index8 alt2"><code class="plain plain">for VM in $(vboxmanage list vms | rev | cut -d' ' -f1 | rev)</code></div><div class="line number10 index9 alt1"><code class="plain plain">do</code></div><div class="line number11 index10 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain"># Get VM state</code></div><div class="line number12 index11 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">STATE=$(vboxmanage showvminfo $VM --machinereadable | grep "VMState=" | cut -d'=' -f2)</code></div><div class="line number13 index12 alt2">&nbsp;</div><div class="line number14 index13 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain"># Pause if state is running or paused, write to status file</code></div><div class="line number15 index14 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">if [[ $STATE == \"running\" || $STATE == \"paused\" ]]; then</code></div><div class="line number16 index15 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">vboxmanage controlvm $VM savestate</code></div><div class="line number17 index16 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain"># No need to restart paused vm's; just let them remain saved.</code></div><div class="line number18 index17 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">if [[ $STATE == \"running\" ]]; then echo "$VM"&gt;&gt;$STATUSFILE; fi</code></div><div class="line number19 index18 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">fi</code></div><div class="line number20 index19 alt1"><code class="plain plain">done</code></div></div></td></tr></tbody></table></div></div>
+<p>In <strong>/home/vbox/resumevms.sh</strong>:</p>
+<div><div id="highlighter_513707" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">#!/bin/bash</code></div><div class="line number2 index1 alt1"><code class="plain plain"># Restart VMs saved earlier</code></div><div class="line number3 index2 alt2">&nbsp;</div><div class="line number4 index3 alt1"><code class="plain plain">STATUSFILE=/home/vbox/vm-status</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="plain plain"># If no status file exists then apparently there are no VMs to resume.</code></div><div class="line number7 index6 alt2"><code class="plain plain">if [ ! -f $STATUSFILE ]; then exit; fi</code></div><div class="line number8 index7 alt1">&nbsp;</div><div class="line number9 index8 alt2"><code class="plain plain">while read VM; do</code></div><div class="line number10 index9 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">vboxmanage startvm $VM --type headless</code></div><div class="line number11 index10 alt2"><code class="plain plain">done &lt;$STATUSFILE</code></div></div></td></tr></tbody></table></div></div>
+<p>Make the scripts accessible to the vbox user and executable:</p>
+<div><div id="highlighter_212990" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># cd /home/vbox</code></div><div class="line number2 index1 alt1"><code class="plain plain"># chown vbox pausevms.sh resumevms.sh</code></div><div class="line number3 index2 alt2"><code class="plain plain"># chmod +x pausevms.sh resumevms.sh</code></div></div></td></tr></tbody></table></div></div>
+<p>Create a unit file <strong>/etc/systemd/system/virtualmachines.service</strong>:</p>
+<div><div id="highlighter_831589" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">[Unit]</code></div><div class="line number2 index1 alt1"><code class="plain plain">Description=Save VirtualBox VMs before shutdown or reboot; resume them after boot.</code></div><div class="line number3 index2 alt2"><code class="plain plain">Wants=multi-user.target</code></div><div class="line number4 index3 alt1"><code class="plain plain">After=multi-user.target</code></div><div class="line number5 index4 alt2">&nbsp;</div><div class="line number6 index5 alt1"><code class="plain plain">[Service]</code></div><div class="line number7 index6 alt2"><code class="plain plain">Type=oneshot</code></div><div class="line number8 index7 alt1"><code class="plain plain">RemainAfterExit=yes</code></div><div class="line number9 index8 alt2"><code class="plain plain">ExecStart=/usr/bin/sudo -u vbox /home/vbox/resumevms.sh</code></div><div class="line number10 index9 alt1"><code class="plain plain">ExecStop=/usr/bin/sudo -u vbox /home/vbox/pausevms.sh</code></div><div class="line number11 index10 alt2"><code class="plain plain">[Install]</code></div><div class="line number12 index11 alt1"><code class="plain plain">WantedBy=multi-user.target</code></div></div></td></tr></tbody></table></div></div>
+<p>Enable the new daemon:</p>
+<div><div id="highlighter_494605" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># systemctl daemon-reload</code></div><div class="line number2 index1 alt1"><code class="plain plain"># systemctl enable virtualmachines.service</code></div></div></td></tr></tbody></table></div></div>
+<p>…But be aware that if you run it now it will put any running VMs in the saved status. So I recommend you stop/save any running VMs at this point, reboot your server, start one or more VMs, reboot and then check if they came back up. Check /var/log/syslog for troubleshooting hints if it doesn’t work.</p>
+<p>The lines containing ‘multi-user.target’ make the script wait after boot until the multi-user.target is reached, which among other things contains the VirtualBox web service. It also makes the script wait on reboot/shutdown until all necessary VMs are saved before shutting down VirtualBox itself and rebooting/shutting down.</p>
+<p>I tested this whole contraption on a virtual machine containing virtual machines. On one test run PhpVirtualBox wouldn’t start (but the VMs would) but upon reboot it did. Most of the time it would just work smoothly. Taking into consideration the VM-in-a-VM setup I am quite satisfied with this system.</p>
+<p><a name="backup"></a></p>
+<h2>Set up a backup system</h2>
+<p>This backup script is taken and adapted from <a href="https://vorkbaard.nl/backup-script-for-virtualbox-vms-in-debian/" rel="noopener" target="_blank">this page</a> (opens in a new tab), which also contains commentary and explanations.</p>
+<p>I’ve put this in <strong>/home/vbox/backupvms.sh</strong>.</p>
+<div><div id="highlighter_102788" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div><div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div><div class="line number26 index25 alt1">26</div><div class="line number27 index26 alt2">27</div><div class="line number28 index27 alt1">28</div><div class="line number29 index28 alt2">29</div><div class="line number30 index29 alt1">30</div><div class="line number31 index30 alt2">31</div><div class="line number32 index31 alt1">32</div><div class="line number33 index32 alt2">33</div><div class="line number34 index33 alt1">34</div><div class="line number35 index34 alt2">35</div><div class="line number36 index35 alt1">36</div><div class="line number37 index36 alt2">37</div><div class="line number38 index37 alt1">38</div><div class="line number39 index38 alt2">39</div><div class="line number40 index39 alt1">40</div><div class="line number41 index40 alt2">41</div><div class="line number42 index41 alt1">42</div><div class="line number43 index42 alt2">43</div><div class="line number44 index43 alt1">44</div><div class="line number45 index44 alt2">45</div><div class="line number46 index45 alt1">46</div><div class="line number47 index46 alt2">47</div><div class="line number48 index47 alt1">48</div><div class="line number49 index48 alt2">49</div><div class="line number50 index49 alt1">50</div><div class="line number51 index50 alt2">51</div><div class="line number52 index51 alt1">52</div><div class="line number53 index52 alt2">53</div><div class="line number54 index53 alt1">54</div><div class="line number55 index54 alt2">55</div><div class="line number56 index55 alt1">56</div><div class="line number57 index56 alt2">57</div><div class="line number58 index57 alt1">58</div><div class="line number59 index58 alt2">59</div><div class="line number60 index59 alt1">60</div><div class="line number61 index60 alt2">61</div><div class="line number62 index61 alt1">62</div><div class="line number63 index62 alt2">63</div><div class="line number64 index63 alt1">64</div><div class="line number65 index64 alt2">65</div><div class="line number66 index65 alt1">66</div><div class="line number67 index66 alt2">67</div><div class="line number68 index67 alt1">68</div><div class="line number69 index68 alt2">69</div><div class="line number70 index69 alt1">70</div><div class="line number71 index70 alt2">71</div><div class="line number72 index71 alt1">72</div><div class="line number73 index72 alt2">73</div><div class="line number74 index73 alt1">74</div><div class="line number75 index74 alt2">75</div><div class="line number76 index75 alt1">76</div><div class="line number77 index76 alt2">77</div><div class="line number78 index77 alt1">78</div><div class="line number79 index78 alt2">79</div><div class="line number80 index79 alt1">80</div><div class="line number81 index80 alt2">81</div><div class="line number82 index81 alt1">82</div><div class="line number83 index82 alt2">83</div><div class="line number84 index83 alt1">84</div><div class="line number85 index84 alt2">85</div><div class="line number86 index85 alt1">86</div><div class="line number87 index86 alt2">87</div><div class="line number88 index87 alt1">88</div><div class="line number89 index88 alt2">89</div><div class="line number90 index89 alt1">90</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain">#!/bin/bash</code></div><div class="line number2 index1 alt1">&nbsp;</div><div class="line number3 index2 alt2"><code class="plain plain"># Loop through all VirtualBox VMs, pause, export,</code></div><div class="line number4 index3 alt1"><code class="plain plain"># and restore them to their original states.</code></div><div class="line number5 index4 alt2"><code class="plain plain">#</code></div><div class="line number6 index5 alt1"><code class="plain plain"># Vorkbaard, 2012-02-01, 2018-02-09</code></div><div class="line number7 index6 alt2">&nbsp;</div><div class="line number8 index7 alt1"><code class="plain plain"># =============== Set your variables here ===============</code></div><div class="line number9 index8 alt2">&nbsp;</div><div class="line number10 index9 alt1"><code class="plain plain">EXPORTDIR=/var/vmbackup</code></div><div class="line number11 index10 alt2"><code class="plain plain">LOGFILE=/home/vbox/export.log</code></div><div class="line number12 index11 alt1"><code class="plain plain">MYMAIL=root</code></div><div class="line number13 index12 alt2"><code class="plain plain">VBOXMANAGE="/usr/bin/VBoxManage -q"</code></div><div class="line number14 index13 alt1">&nbsp;</div><div class="line number15 index14 alt2"><code class="plain plain"># =======================================================</code></div><div class="line number16 index15 alt1">&nbsp;</div><div class="line number17 index16 alt2"><code class="plain plain"># Generate a list of all VMs</code></div><div class="line number18 index17 alt1">&nbsp;</div><div class="line number19 index18 alt2"><code class="plain plain">for VM in $(vboxmanage list vms | rev | cut -d' ' -f1 | rev)</code></div><div class="line number20 index19 alt1"><code class="plain plain">do</code></div><div class="line number21 index20 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">ERR="nothing"</code></div><div class="line number22 index21 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">SECONDS=0</code></div><div class="line number23 index22 alt2">&nbsp;</div><div class="line number24 index23 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain"># Get VM's friendly name</code></div><div class="line number25 index24 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">FRIENDLYNAME=$(vboxmanage showvminfo --machinereadable $VM | grep "name=" | cut -d'"' -f2)</code></div><div class="line number26 index25 alt1">&nbsp;</div><div class="line number27 index26 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain"># Delete old $LOGFILE file if it exists</code></div><div class="line number28 index27 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">if [ -e $LOGFILE ]; then rm $LOGFILE; fi</code></div><div class="line number29 index28 alt2">&nbsp;</div><div class="line number30 index29 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain"># Get the vm state</code></div><div class="line number31 index30 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">VMSTATE=$(vboxmanage showvminfo $VM --machinereadable | grep "VMState=" | cut -f 2 -d "=")</code></div><div class="line number32 index31 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">echo "$VM's state is: $VMSTATE."</code></div><div class="line number33 index32 alt2">&nbsp;</div><div class="line number34 index33 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain"># If the VM's state is running or paused, save its state</code></div><div class="line number35 index34 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">if [[ $VMSTATE == \"running\" || $VMSTATE == \"paused\" ]]; then</code></div><div class="line number36 index35 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">vboxmanage controlvm $VM savestate</code></div><div class="line number37 index36 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">if [ $? -ne 0 ]; then ERR="saving the state"; fi</code></div><div class="line number38 index37 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">fi</code></div><div class="line number39 index38 alt2"><code class="plain spaces">&nbsp;&nbsp;</code>&nbsp;</div><div class="line number40 index39 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain"># Export the vm as appliance</code></div><div class="line number41 index40 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">if [ "$ERR" == "nothing" ]; then</code></div><div class="line number42 index41 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">vboxmanage export $VM --output $EXPORTDIR/$VM-new.ova &amp;&gt; $LOGFILE</code></div><div class="line number43 index42 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">if [ $? -ne 0 ]; then</code></div><div class="line number44 index43 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">ERR="exporting"</code></div><div class="line number45 index44 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">else</code></div><div class="line number46 index45 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain"># Remove old backup and rename new one</code></div><div class="line number47 index46 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">if [ -e $EXPORTDIR/$VM.ova ]; then rm $EXPORTDIR/$VM.ova; fi</code></div><div class="line number48 index47 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">mv $EXPORTDIR/$VM-new.ova $EXPORTDIR/$VM.ova</code></div><div class="line number49 index48 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain"># Get file size</code></div><div class="line number50 index49 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">FILESIZE=$(du -h $EXPORTDIR/$VM.ova | cut -f 1)</code></div><div class="line number51 index50 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">fi</code></div><div class="line number52 index51 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">else</code></div><div class="line number53 index52 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">echo "Not exporting because the VM's state couldn't be saved." &amp;&gt; $LOGFILE</code></div><div class="line number54 index53 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">fi</code></div><div class="line number55 index54 alt2"><code class="plain spaces">&nbsp;&nbsp;</code>&nbsp;</div><div class="line number56 index55 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain"># Resume the VM to its previous state if that state was paused or running</code></div><div class="line number57 index56 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">if [[ $VMSTATE == \"running\" || $VMSTATE == \"paused\" ]]; then</code></div><div class="line number58 index57 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">vboxmanage startvm $VM --type headless</code></div><div class="line number59 index58 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">if [ $? -ne 0 ]; then ERR="resuming"; fi</code></div><div class="line number60 index59 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">if [ $VMSTATE == \"paused\" ]; then</code></div><div class="line number61 index60 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">vboxmanage controlvm $VM pause</code></div><div class="line number62 index61 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">if [ $? -ne 0 ]; then ERR="pausing"; fi</code></div><div class="line number63 index62 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">fi</code></div><div class="line number64 index63 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">fi</code></div><div class="line number65 index64 alt2"><code class="plain spaces">&nbsp;&nbsp;</code>&nbsp;</div><div class="line number66 index65 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain"># Calculate duration</code></div><div class="line number67 index66 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">duration=$SECONDS</code></div><div class="line number68 index67 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">duration="Operation took $(($duration / 60)) minutes, $(($duration % 60)) seconds."</code></div><div class="line number69 index68 alt2"><code class="plain spaces">&nbsp;&nbsp;</code>&nbsp;</div><div class="line number70 index69 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain"># Notify the admin</code></div><div class="line number71 index70 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">if [ "$ERR" == "nothing" ]; then</code></div><div class="line number72 index71 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">MAILBODY="Virtual Machine $FRIENDLYNAME was exported succesfully!"</code></div><div class="line number73 index72 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">MAILBODY="$MAILBODY"$'\n'"$duration"</code></div><div class="line number74 index73 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">MAILBODY="$MAILBODY"$'\n'"Export filesize: $FILESIZE"</code></div><div class="line number75 index74 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">MAILSUBJECT="VM $VM succesfully backed up"</code></div><div class="line number76 index75 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">else</code></div><div class="line number77 index76 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">MAILBODY="There was an error $ERR VM $VM."</code></div><div class="line number78 index77 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">if [ "$ERR" == "exporting" ]; then</code></div><div class="line number79 index78 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">MAILBODY=$(echo $MAILBODY &amp;&amp; cat $LOGFILE)</code></div><div class="line number80 index79 alt1"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">fi</code></div><div class="line number81 index80 alt2"><code class="plain spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="plain plain">MAILSUBJECT="Error exporting VM $VM"</code></div><div class="line number82 index81 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">fi</code></div><div class="line number83 index82 alt2"><code class="plain spaces">&nbsp;&nbsp;</code>&nbsp;</div><div class="line number84 index83 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain"># Send the mail</code></div><div class="line number85 index84 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">echo "$MAILBODY" | mail -s "$MAILSUBJECT" $MYMAIL</code></div><div class="line number86 index85 alt1"><code class="plain spaces">&nbsp;&nbsp;</code>&nbsp;</div><div class="line number87 index86 alt2"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain"># Clean up</code></div><div class="line number88 index87 alt1"><code class="plain spaces">&nbsp;&nbsp;</code><code class="plain plain">if [ -e $LOGFILE ]; then rm $LOGFILE; fi</code></div><div class="line number89 index88 alt2">&nbsp;</div><div class="line number90 index89 alt1"><code class="plain plain">done</code></div></div></td></tr></tbody></table></div></div>
+<p>Chown the script to the vbox user and make it executable:</p>
+<div><div id="highlighter_90128" class="syntaxhighlighter  plain"><div class="toolbar"><span><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="plain plain"># chown vbox /home/vbox/backupvms.sh</code></div><div class="line number2 index1 alt1"><code class="plain plain"># chmod +x /home/vbox/backupvms.sh</code></div></div></td></tr></tbody></table></div></div>
+<p>Then schedule it using <a href="https://vorkbaard.nl/fun-with-cron/" rel="noopener" target="_blank">cron</a> or just run it whenever you like.</p>
+<p>If you want the mail part to work configure mail or mailx for your system. Otherwise it’ll just send mail to local addresses. You can also use ssmtp if you don’t want to set up EXIM or Postfix; ssmtp is easy to set up and is used mainly for systems that just need to be able to send the occasional outgoing mail.</p>
+<h2>That’s it!</h2>
+<p>If you have any questions not related to PhpVirtualBox or VirtualBox itself (they are not my projects) feel free to ask them in the comment section below. </p>
+<p><strong>If you found this article helpful</strong> please click some of the ads on my page to help me pay for hosting this site, or consider donating any amount using the PayPal donation button on the top right of this page. Thanks :)</p>
+<p><a name="troubleshoot"></a></p>
+<h2>Troubleshooting</h2>
+<ul>
+<li>Different versions of VirtualBox and the extension pack may lead to unexpected behavious and weird errors.</li>
+<li>Mouse or keyboard not working in RDP session may be caused by lack of video memory (&lt;128MB) in the VM.</li>
+<li>Check /var/log/syslog for messages regarding VirtualBox and PhpVirtualBox.</li>
+<li>Unable to install certain packages: perhaps new versions have been published. Stop copying and pasting commands from this site and start actually reading what your server is telling you.</li>
+<li>Unable to unzip phpvirtualbox.zip: download from a different server. Try the German ones.</li>
+<li>PhpVirtualBox’s default username and password are both ‘admin’.</li>
+</ul>
+					
+									</div><!--.post-content-->
+			</article>
+
+			<div class="post-meta">
+				<p>
+					<span class="category-icon"><a href="https://vorkbaard.nl/category/tech/" rel="category tag">Tech</a></span>
+					 <span class="tags-icon"><a href="https://vorkbaard.nl/tag/automatically/" rel="tag">automatically</a>, <a href="https://vorkbaard.nl/tag/autostart/" rel="tag">autostart</a>, <a href="https://vorkbaard.nl/tag/backup/" rel="tag">backup</a>, <a href="https://vorkbaard.nl/tag/phpvirtualbox/" rel="tag">phpvirtualbox</a>, <a href="https://vorkbaard.nl/tag/reboot/" rel="tag">reboot</a>, <a href="https://vorkbaard.nl/tag/service/" rel="tag">service</a>, <a href="https://vorkbaard.nl/tag/shutdown/" rel="tag">shutdown</a>, <a href="https://vorkbaard.nl/tag/systemd/" rel="tag">systemd</a>, <a href="https://vorkbaard.nl/tag/unit/" rel="tag">unit</a>, <a href="https://vorkbaard.nl/tag/vbox/" rel="tag">vbox</a>, <a href="https://vorkbaard.nl/tag/vboxweb/" rel="tag">vboxweb</a>, <a href="https://vorkbaard.nl/tag/vboxwebsrv/" rel="tag">vboxwebsrv</a>, <a href="https://vorkbaard.nl/tag/virtualbox/" rel="tag">virtualbox</a>, <a href="https://vorkbaard.nl/tag/web-if/" rel="tag">web if</a>, <a href="https://vorkbaard.nl/tag/web-interface/" rel="tag">web interface</a>, <a href="https://vorkbaard.nl/tag/webif/" rel="tag">webif</a>, <a href="https://vorkbaard.nl/tag/webinterface/" rel="tag">webinterface</a> </span>                    <span class="commented-icon">13 Comments</span>
+					                  
+				
+                </p><p>
+					Recieve new post updates: <a href="https://vorkbaard.nl/feed/" rel="nofollow">Entries (RSS)</a>
+					<br>
+					Recieve follow up comments updates: <a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/feed/">RSS 2.0</a>				</p>
+			</div><!--#post-meta-->
+
+						<div id="post-author">
+				<h3>Written by <a href="https://vorkbaard.nl/author/vorkbaard/" title="Posts by Kapitein Vorkbaard" rel="author">Kapitein Vorkbaard</a></h3>
+				<p class="gravatar"><img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/33818ccf234df0379cb1d65c349f826a.png" srcset="https://secure.gravatar.com/avatar/33818ccf234df0379cb1d65c349f826a?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80"></p>
+				<div id="authorDescription">
+					 
+					<div id="author-link">
+						<p>View all posts by: <a href="https://vorkbaard.nl/author/vorkbaard/" title="Posts by Kapitein Vorkbaard" rel="author">Kapitein Vorkbaard</a></p>
+					</div><!--#author-link-->
+				</div><!--#author-description -->
+			</div><!--#post-author-->
+
+		</div><!-- #post-## -->
+
+		<div id="nav-below" class="navigation">
+				<div class="nav-previous"><a href="https://vorkbaard.nl/the-wandering-earth-door-cixin-liu/" rel="prev">« The Wandering Earth, door Cixin Liu</a></div>
+				<div class="nav-next"><a href="https://vorkbaard.nl/dichronauts-door-greg-egan/" rel="next">Dichronauts, door Greg Egan »</a></div>
+		</div>
+
+		<!-- You can start editing here. -->
+
+				<div id="comments-div"><span id="comments-addcomment"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#respond" rel="nofollow" title="Leave a comment">Leave a comment</a></span><h2 id="comments">13 Comments.</h2></div>
+			<ol class="commentlist" id="thecomments">
+						<li class="comment even thread-even depth-1" id="li-comment-88371">
+	
+    <div id="comment-88371">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/670f9e84881d1c6d2e3891bae10a62c0.png" srcset="https://secure.gravatar.com/avatar/670f9e84881d1c6d2e3891bae10a62c0?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author">Alboy</p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-88371">2018-04-18</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>Thanks a lot my friend :)<br>
+This is a good tutorial.</p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=88371#respond" data-commentid="88371" data-postid="3832" data-belowelement="comment-88371" data-respondelement="respond" aria-label="Reply to Alboy">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-88962">
+	
+    <div id="comment-88962">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/dfc3b2964efc6f152b4fcef98c94a4a9.png" srcset="https://secure.gravatar.com/avatar/dfc3b2964efc6f152b4fcef98c94a4a9?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author"><a href="http://fortu.io/" rel="external nofollow" class="url">FoRTu</a></p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-88962">2018-06-14</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>Thanks, great tutorial!</p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=88962#respond" data-commentid="88962" data-postid="3832" data-belowelement="comment-88962" data-respondelement="respond" aria-label="Reply to FoRTu">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-89353">
+	
+    <div id="comment-89353">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/414b43edd7290ec2d410cb22785afa11.png" srcset="https://secure.gravatar.com/avatar/414b43edd7290ec2d410cb22785afa11?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author">Diego</p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-89353">2018-07-29</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>Hi, and thanks for this tutorial. I have a question: Does the exported vm retains it’s (saved) state? I tried to restore one of the backups and the machine started offline, not in a saved state.</p>
+<p>Cheers</p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=89353#respond" data-commentid="89353" data-postid="3832" data-belowelement="comment-89353" data-respondelement="respond" aria-label="Reply to Diego">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	<ul class="children">
+	<li class="comment byuser comment-author-vorkbaard bypostauthor odd alt depth-2" id="li-comment-89575">
+	
+    <div id="comment-89575">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/33818ccf234df0379cb1d65c349f826a.png" srcset="https://secure.gravatar.com/avatar/33818ccf234df0379cb1d65c349f826a?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author">Kapitein Vorkbaard</p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-89575">2018-08-13</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>I thought it would but its easy to test: just perform the export and restore manually.</p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=89575#respond" data-commentid="89575" data-postid="3832" data-belowelement="comment-89575" data-respondelement="respond" aria-label="Reply to Kapitein Vorkbaard">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-91298">
+	
+    <div id="comment-91298">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/94e1b0c748bce4e5448c6b3c8c549ed1.png" srcset="https://secure.gravatar.com/avatar/94e1b0c748bce4e5448c6b3c8c549ed1?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author">Michael</p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-91298">2018-11-06</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>Great big thanks.</p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=91298#respond" data-commentid="91298" data-postid="3832" data-belowelement="comment-91298" data-respondelement="respond" aria-label="Reply to Michael">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-92615">
+	
+    <div id="comment-92615">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/67e464b9824febb47469ef06f941de6d.png" srcset="https://secure.gravatar.com/avatar/67e464b9824febb47469ef06f941de6d?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author">Leon</p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-92615">2019-02-21</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>Hi. Great script I used for two years already.<br>
+Recently I needed to restore the backed up copy and to my horror discovered that restoration fails with “file corrupted” message. It appears that the copy (13GB) was recorded with some error.<br>
+To my great luck I had one more copy (a bit older, but what can I do…) – so I restored the system.<br>
+But now I added the following to my (actually your) script:</p>
+<p>export() {<br>
+      vboxmanage export $VMNAME –output $EXPORTDIR/$VMNAME-new.ova &amp;&gt;&gt;export.log<br>
+          while [ true ] ; do<br>
+        vboxmanage export $VMNAME –output $EXPORTDIR/$VMNAME-new.ova &amp;&gt;&gt; export.log<br>
+        if [ $? -ne 0 ]; then<br>
+          ERR=”exporting”<br>
+                  return 1<br>
+                fi<br>
+        cp stamdat $EXPORTDIR/$VMNAME-new1.ova &amp;&gt;&gt; export.log<br>
+        vboxmanage export $VMNAME –output $EXPORTDIR/$VMNAME-new1.ova &amp;&gt;&gt; export.log<br>
+        if [ $? -ne 0 ]; then<br>
+          ERR=”exporting”<br>
+                  return 1<br>
+                fi<br>
+                cmp $EXPORTDIR/$VMNAME-new.ova $EXPORTDIR/$VMNAME-new1.ova<br>
+        if [ $? -ne 0 ]; then<br>
+          echo “Copies not equal!” &amp;&gt;&gt;export.log<br>
+          rm $EXPORTDIR/$VMNAME-new.ova<br>
+                  mv $EXPORTDIR/$VMNAME-new1.ova $EXPORTDIR/$VMNAME-new.ova<br>
+                  continue<br>
+                fi<br>
+                break<br>
+          done<br>
+          rm $EXPORTDIR/$VMNAME-new1.ova<br>
+}<br>
+and corresponding call to export() instead of straight “vboxmanage export”</p>
+<p>It appears that you renewed the script and introduced some very nice changes.<br>
+So, I decided to write this to you – may be you would like to incorporate this change too?</p>
+<p>Thanks!</p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=92615#respond" data-commentid="92615" data-postid="3832" data-belowelement="comment-92615" data-respondelement="respond" aria-label="Reply to Leon">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-92616">
+	
+    <div id="comment-92616">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/67e464b9824febb47469ef06f941de6d.png" srcset="https://secure.gravatar.com/avatar/67e464b9824febb47469ef06f941de6d?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author">Leon</p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-92616">2019-02-21</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>Sorry, I see that the site eliminates formatting and the text is hardly readable.<br>
+In two word: I make the “vboxmanage export” twice, compare the copies and if not equal – remove the first and continue this till they will BE equal.<br>
+Thanks again! :-)</p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=92616#respond" data-commentid="92616" data-postid="3832" data-belowelement="comment-92616" data-respondelement="respond" aria-label="Reply to Leon">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	<ul class="children">
+	<li class="comment byuser comment-author-vorkbaard bypostauthor odd alt depth-2" id="li-comment-92620">
+	
+    <div id="comment-92620">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/33818ccf234df0379cb1d65c349f826a.png" srcset="https://secure.gravatar.com/avatar/33818ccf234df0379cb1d65c349f826a?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author">Kapitein Vorkbaard</p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-92620">2019-02-21</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>That’s a great idea! It doubles your backup time but this setup it not targeted for corporate use; personally I used it to back up my PfSense router in the middle of the night.</p>
+<p>I’ll just let your comment remain here – if I’m going to integrate it in the article I would like to test it first and I haven’t the time for that. I am sure this will come in handy for other readers.</p>
+<p>Thank you!</p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=92620#respond" data-commentid="92620" data-postid="3832" data-belowelement="comment-92620" data-respondelement="respond" aria-label="Reply to Kapitein Vorkbaard">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	<ul class="children">
+	<li class="comment even depth-3" id="li-comment-92676">
+	
+    <div id="comment-92676">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/67e464b9824febb47469ef06f941de6d.png" srcset="https://secure.gravatar.com/avatar/67e464b9824febb47469ef06f941de6d?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author">leonp</p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-92676">2019-02-26</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>OK, the situation is worse.<br>
+Each run of “vboxmanage export” produces different results, thus files/backups are not compatible (cmp always fails).<br>
+Any ideas?</p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=92676#respond" data-commentid="92676" data-postid="3832" data-belowelement="comment-92676" data-respondelement="respond" aria-label="Reply to leonp">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-92696">
+	
+    <div id="comment-92696">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/67e464b9824febb47469ef06f941de6d.png" srcset="https://secure.gravatar.com/avatar/67e464b9824febb47469ef06f941de6d?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author">Leonp</p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-92696">2019-02-28</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>OK, finally, this works.<br>
+What I did is:<br>
+– export VM locally on the disk<br>
+– copy it twice to backup media<br>
+– compare remote copies and copy again if needed<br>
+This works even better than the previous version, because making local export takes significantly less time than remote export. This locks out the VM for significantly less time.<br>
+The new version is at:</p>
+<p><a href="https://drive.google.com/open?id=1eKr4S8tkk3CwtN2dVU-weYhCLKOiLJYK" rel="nofollow">https://drive.google.com/open?id=1eKr4S8tkk3CwtN2dVU-weYhCLKOiLJYK</a></p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=92696#respond" data-commentid="92696" data-postid="3832" data-belowelement="comment-92696" data-respondelement="respond" aria-label="Reply to Leonp">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-94163">
+	
+    <div id="comment-94163">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/9464994f2d0a974c555641a367f07b35.png" srcset="https://secure.gravatar.com/avatar/9464994f2d0a974c555641a367f07b35?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author"><a href="http://none%20as%20yet/" rel="external nofollow" class="url">timothy smy</a></p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-94163">2019-06-04</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>ok i would like some help i installed debian 9 from a netstat disk saved on a usb stick you see I want the debian server to have as littlw as possible installed so if you do not mind please what is the lightest possible server and what lines should be in my sources file BEFORE I start instaaling virtualbox. sorry if this question is somewhat off topic.</p>
+<p>tim</p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=94163#respond" data-commentid="94163" data-postid="3832" data-belowelement="comment-94163" data-respondelement="respond" aria-label="Reply to timothy smy">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-94256">
+	
+    <div id="comment-94256">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/7b7cec78e74805235baae035b1db87e8.png" srcset="https://secure.gravatar.com/avatar/7b7cec78e74805235baae035b1db87e8?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author">Leo</p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-94256">2019-06-13</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>Hi, thank you for this guide.</p>
+<p>I have a problem. When I restart the server it stops the VM but it does not create a Statusfile. and because missing the status file it cant restart the vm after reboot. i tried also to change the statusfile directory but the same problem i dont know what i did wrong….</p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=94256#respond" data-commentid="94256" data-postid="3832" data-belowelement="comment-94256" data-respondelement="respond" aria-label="Reply to Leo">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	<ul class="children">
+	<li class="comment even depth-2" id="li-comment-94257">
+	
+    <div id="comment-94257">
+		
+                
+        <div class="comment-meta">
+        <div class="gravatar">
+			<img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/7b7cec78e74805235baae035b1db87e8.png" srcset="https://secure.gravatar.com/avatar/7b7cec78e74805235baae035b1db87e8?s=160&amp;d=mm&amp;r=g 2x" class="avatar avatar-80 photo" height="80" width="80">		</div><!--comment-author gravatar-->
+            <p class="comment_author">Leo</p>
+			
+            <p class="comment_date"><a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-94257">2019-06-13</a></p>
+					
+		</div><!--comment-meta-->
+		<div class="comment-text">
+			<p>i dont use PhpVirtualBox so i skiped this part.</p>
+		
+        <div class="reply">
+			<a rel="nofollow" class="comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/?replytocom=94257#respond" data-commentid="94257" data-postid="3832" data-belowelement="comment-94257" data-respondelement="respond" aria-label="Reply to Leo">Reply</a>		</div><!--reply-->
+        
+        </div><!--comment-text-->
+		
+	</div>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+			</ol>
+			<div class="navigation-comments"></div>
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#respond" style="display:none;">Cancel reply</a></small></h3>			<form action="https://vorkbaard.nl/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+				<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p><p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required="required"></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" required="required"></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200"></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="3832" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="4113d0046e"></p><p style="display: none;"></p>			<input type="hidden" id="ak_js" name="ak_js" value="1562589203593"></form>
+			</div><!-- #respond -->
+	<p class="akismet_comment_form_privacy_notice">This site uses Akismet to reduce spam. <a href="https://akismet.com/privacy/" target="_blank" rel="nofollow noopener">Learn how your comment data is processed</a>.</p>		<div class="trackbacks-pingbacks">
+			<h3>Trackbacks and Pingbacks:</h3>
+			<ul id="pinglist">
+				    <li id="comment-92526">
+        <a href="https://www.bkvps.com/234.html" rel="external nofollow" class="url">Debian 9 安装 VirtualBOX和phpvirtualbox | 免费资源,低价vps,服务器配置,vps建站,免费空间贝壳主机网</a> - Pingback on 2019/02/14/ 02:45	</li><!-- #comment-## -->
+			</ul>
+		</div>
+	
+	</div><!--#content-->
+<div id="sidebar">
+	<div class="widget-area"><form role="search" method="get" id="searchform" class="searchform" action="https://vorkbaard.nl/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s">
+					<input type="submit" id="searchsubmit" value="Search">
+				</div>
+			</form></div><div class="widget-area"><h3>Donate</h3><p>Did one of my articles help you? Help me pay for hosting this site! Any amount is greatly appreciated :)</p>
+<!-- Begin PayPal Donations by https://www.tipsandtricks-hq.com/paypal-donations-widgets-plugin -->
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+    <div class="paypal-donations">
+        <input type="hidden" name="cmd" value="_donations">
+        <input type="hidden" name="bn" value="TipsandTricks_SP">
+        <input type="hidden" name="business" value="martin@huijgen.com">
+        <input type="hidden" name="item_name" value="Help pay for hosting Vorkbaard.nl">
+        <input type="hidden" name="rm" value="0">
+        <input type="hidden" name="currency_code" value="EUR">
+        <input type="image" style="cursor: pointer;" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/btn_donate_LG.gif" name="submit" alt="PayPal - The safer, easier way to pay online.">
+        <img alt="" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/pixel.gif" width="1" height="1">
+    </div>
+</form>
+<!-- End PayPal Donations -->
+</div>		<div class="widget-area">		<h3>Recent Posts</h3>		<ul>
+											<li>
+					<a href="https://vorkbaard.nl/how-to-invent-everything-door-ryan-north/">How to invent everything, door Ryan North</a>
+									</li>
+											<li>
+					<a href="https://vorkbaard.nl/radicalized-door-cory-doctorow/">Radicalized, door Cory Doctorow</a>
+									</li>
+											<li>
+					<a href="https://vorkbaard.nl/solved-hpe-usb-doesnt-work-in-windows-10/">Solved: HPE USB doesn’t work in Windows 10</a>
+									</li>
+											<li>
+					<a href="https://vorkbaard.nl/time-enough-for-love-the-world-as-myth-1-door-robert-a-heinlein/">Time Enough for Love (The World As Myth #1), door Robert A. Heinlein</a>
+									</li>
+											<li>
+					<a href="https://vorkbaard.nl/the-night-masquerade-binti-3-door-nnedi-okorafor/">The Night Masquerade (Binti #3), door Nnedi Okorafor</a>
+									</li>
+											<li>
+					<a href="https://vorkbaard.nl/state-tectonics-centenal-cycle-3-door-malka-older/">State Tectonics (Centenal Cycle #3), door Malka Older</a>
+									</li>
+											<li>
+					<a href="https://vorkbaard.nl/stop-microsoft-teams-from-starting/">Stop Microsoft Teams from starting</a>
+									</li>
+											<li>
+					<a href="https://vorkbaard.nl/ancestral-night-white-space-1-door-elizabeth-bear/">Ancestral Night (White Space  #1), door Elizabeth Bear</a>
+									</li>
+											<li>
+					<a href="https://vorkbaard.nl/the-hydrogen-sonata-culture-10-door-iain-m-banks/">The Hydrogen Sonata (Culture #10), door Iain M. Banks</a>
+									</li>
+											<li>
+					<a href="https://vorkbaard.nl/red-moon-door-kim-stanley-robinson/">Red Moon, door Kim Stanley Robinson</a>
+									</li>
+					</ul>
+		</div><div class="widget-area"><h3>Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">rjman</span> on <a href="https://vorkbaard.nl/routing-internet-traffic-through-a-site-to-site-ipsec-tunnel-in-pfsense-2-1/#comment-94393">Routing internet traffic through a site-to-site IPsec tunnel in PfSense 2.1</a></li><li class="recentcomments"><span class="comment-author-link">CJ</span> on <a href="https://vorkbaard.nl/solved-logitech-setpoint-settings-are-lost-after-a-reboot/#comment-94288">Solved: Logitech SetPoint settings are lost after a reboot</a></li><li class="recentcomments"><span class="comment-author-link">Leo</span> on <a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-94257">How to set up a VirtualBox server in Debian 9: web interface, autostart, backup</a></li><li class="recentcomments"><span class="comment-author-link">Leo</span> on <a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-94256">How to set up a VirtualBox server in Debian 9: web interface, autostart, backup</a></li><li class="recentcomments"><span class="comment-author-link"><a href="http://none%20as%20yet/" rel="external nofollow" class="url">timothy smy</a></span> on <a href="https://vorkbaard.nl/how-to-set-up-a-virtualbox-server-in-debian-9-web-interface-autostart-backup/#comment-94163">How to set up a VirtualBox server in Debian 9: web interface, autostart, backup</a></li></ul></div><div class="widget-area"><h3>Tags</h3><div class="tagcloud"><a href="https://vorkbaard.nl/tag/actie/" class="tag-cloud-link tag-link-409 tag-link-position-1" style="font-size: 14.102564102564pt;" aria-label="actie (10 items)">actie</a>
+<a href="https://vorkbaard.nl/tag/active-directory/" class="tag-cloud-link tag-link-81 tag-link-position-2" style="font-size: 15.358974358974pt;" aria-label="active directory (12 items)">active directory</a>
+<a href="https://vorkbaard.nl/tag/ad/" class="tag-cloud-link tag-link-34 tag-link-position-3" style="font-size: 14.820512820513pt;" aria-label="ad (11 items)">ad</a>
+<a href="https://vorkbaard.nl/tag/ai/" class="tag-cloud-link tag-link-293 tag-link-position-4" style="font-size: 16.615384615385pt;" aria-label="AI (14 items)">AI</a>
+<a href="https://vorkbaard.nl/tag/aliens/" class="tag-cloud-link tag-link-342 tag-link-position-5" style="font-size: 15.358974358974pt;" aria-label="aliens (12 items)">aliens</a>
+<a href="https://vorkbaard.nl/tag/backup/" class="tag-cloud-link tag-link-57 tag-link-position-6" style="font-size: 9.4358974358974pt;" aria-label="backup (5 items)">backup</a>
+<a href="https://vorkbaard.nl/tag/clamav/" class="tag-cloud-link tag-link-216 tag-link-position-7" style="font-size: 16.076923076923pt;" aria-label="clamav (13 items)">clamav</a>
+<a href="https://vorkbaard.nl/tag/complete/" class="tag-cloud-link tag-link-304 tag-link-position-8" style="font-size: 14.820512820513pt;" aria-label="complete (11 items)">complete</a>
+<a href="https://vorkbaard.nl/tag/connect/" class="tag-cloud-link tag-link-223 tag-link-position-9" style="font-size: 10.692307692308pt;" aria-label="connect (6 items)">connect</a>
+<a href="https://vorkbaard.nl/tag/culture/" class="tag-cloud-link tag-link-379 tag-link-position-10" style="font-size: 10.692307692308pt;" aria-label="culture (6 items)">culture</a>
+<a href="https://vorkbaard.nl/tag/debian/" class="tag-cloud-link tag-link-52 tag-link-position-11" style="font-size: 22pt;" aria-label="debian (29 items)">debian</a>
+<a href="https://vorkbaard.nl/tag/detective/" class="tag-cloud-link tag-link-424 tag-link-position-12" style="font-size: 10.692307692308pt;" aria-label="detective (6 items)">detective</a>
+<a href="https://vorkbaard.nl/tag/dovecot/" class="tag-cloud-link tag-link-300 tag-link-position-13" style="font-size: 14.820512820513pt;" aria-label="Dovecot (11 items)">Dovecot</a>
+<a href="https://vorkbaard.nl/tag/fail2ban/" class="tag-cloud-link tag-link-229 tag-link-position-14" style="font-size: 16.076923076923pt;" aria-label="fail2ban (13 items)">fail2ban</a>
+<a href="https://vorkbaard.nl/tag/fantasy/" class="tag-cloud-link tag-link-325 tag-link-position-15" style="font-size: 18.769230769231pt;" aria-label="fantasy (19 items)">fantasy</a>
+<a href="https://vorkbaard.nl/tag/klassieke-scifi/" class="tag-cloud-link tag-link-376 tag-link-position-16" style="font-size: 19.487179487179pt;" aria-label="klassieke scifi (21 items)">klassieke scifi</a>
+<a href="https://vorkbaard.nl/tag/kunstmatige-intelligentie/" class="tag-cloud-link tag-link-294 tag-link-position-17" style="font-size: 18.051282051282pt;" aria-label="kunstmatige intelligentie (17 items)">kunstmatige intelligentie</a>
+<a href="https://vorkbaard.nl/tag/linux/" class="tag-cloud-link tag-link-51 tag-link-position-18" style="font-size: 8pt;" aria-label="linux (4 items)">linux</a>
+<a href="https://vorkbaard.nl/tag/maatschappijkritiek/" class="tag-cloud-link tag-link-383 tag-link-position-19" style="font-size: 11.589743589744pt;" aria-label="maatschappijkritiek (7 items)">maatschappijkritiek</a>
+<a href="https://vorkbaard.nl/tag/mail/" class="tag-cloud-link tag-link-303 tag-link-position-20" style="font-size: 16.974358974359pt;" aria-label="mail (15 items)">mail</a>
+<a href="https://vorkbaard.nl/tag/mcdevitt/" class="tag-cloud-link tag-link-186 tag-link-position-21" style="font-size: 8pt;" aria-label="mcdevitt (4 items)">mcdevitt</a>
+<a href="https://vorkbaard.nl/tag/military-scifi/" class="tag-cloud-link tag-link-346 tag-link-position-22" style="font-size: 9.4358974358974pt;" aria-label="military scifi (5 items)">military scifi</a>
+<a href="https://vorkbaard.nl/tag/mysql/" class="tag-cloud-link tag-link-60 tag-link-position-23" style="font-size: 15.358974358974pt;" aria-label="mysql (12 items)">mysql</a>
+<a href="https://vorkbaard.nl/tag/openvpn/" class="tag-cloud-link tag-link-33 tag-link-position-24" style="font-size: 10.692307692308pt;" aria-label="openvpn (6 items)">openvpn</a>
+<a href="https://vorkbaard.nl/tag/owncloud/" class="tag-cloud-link tag-link-136 tag-link-position-25" style="font-size: 13.384615384615pt;" aria-label="owncloud (9 items)">owncloud</a>
+<a href="https://vorkbaard.nl/tag/pfsense/" class="tag-cloud-link tag-link-24 tag-link-position-26" style="font-size: 16.076923076923pt;" aria-label="pfsense (13 items)">pfsense</a>
+<a href="https://vorkbaard.nl/tag/politiek/" class="tag-cloud-link tag-link-407 tag-link-position-27" style="font-size: 10.692307692308pt;" aria-label="politiek (6 items)">politiek</a>
+<a href="https://vorkbaard.nl/tag/postfix/" class="tag-cloud-link tag-link-299 tag-link-position-28" style="font-size: 16.076923076923pt;" aria-label="Postfix (13 items)">Postfix</a>
+<a href="https://vorkbaard.nl/tag/posthumanisme/" class="tag-cloud-link tag-link-313 tag-link-position-29" style="font-size: 10.692307692308pt;" aria-label="posthumanisme (6 items)">posthumanisme</a>
+<a href="https://vorkbaard.nl/tag/robots/" class="tag-cloud-link tag-link-425 tag-link-position-30" style="font-size: 11.589743589744pt;" aria-label="robots (7 items)">robots</a>
+<a href="https://vorkbaard.nl/tag/roundcube/" class="tag-cloud-link tag-link-302 tag-link-position-31" style="font-size: 16.076923076923pt;" aria-label="Roundcube (13 items)">Roundcube</a>
+<a href="https://vorkbaard.nl/tag/scifi/" class="tag-cloud-link tag-link-207 tag-link-position-32" style="font-size: 11.589743589744pt;" aria-label="Scifi (7 items)">Scifi</a>
+<a href="https://vorkbaard.nl/tag/server/" class="tag-cloud-link tag-link-30 tag-link-position-33" style="font-size: 16.076923076923pt;" aria-label="server (13 items)">server</a>
+<a href="https://vorkbaard.nl/tag/space-opera/" class="tag-cloud-link tag-link-323 tag-link-position-34" style="font-size: 18.051282051282pt;" aria-label="space opera (17 items)">space opera</a>
+<a href="https://vorkbaard.nl/tag/spamassassin/" class="tag-cloud-link tag-link-301 tag-link-position-35" style="font-size: 14.820512820513pt;" aria-label="Spamassassin (11 items)">Spamassassin</a>
+<a href="https://vorkbaard.nl/tag/stretch/" class="tag-cloud-link tag-link-426 tag-link-position-36" style="font-size: 15.358974358974pt;" aria-label="stretch (12 items)">stretch</a>
+<a href="https://vorkbaard.nl/tag/technothriller/" class="tag-cloud-link tag-link-408 tag-link-position-37" style="font-size: 8pt;" aria-label="technothriller (4 items)">technothriller</a>
+<a href="https://vorkbaard.nl/tag/thunderbird/" class="tag-cloud-link tag-link-305 tag-link-position-38" style="font-size: 15.358974358974pt;" aria-label="Thunderbird (12 items)">Thunderbird</a>
+<a href="https://vorkbaard.nl/tag/transhumanisme/" class="tag-cloud-link tag-link-312 tag-link-position-39" style="font-size: 14.102564102564pt;" aria-label="transhumanisme (10 items)">transhumanisme</a>
+<a href="https://vorkbaard.nl/tag/twitter-2/" class="tag-cloud-link tag-link-15 tag-link-position-40" style="font-size: 11.589743589744pt;" aria-label="twitter (7 items)">twitter</a>
+<a href="https://vorkbaard.nl/tag/ubuntu/" class="tag-cloud-link tag-link-68 tag-link-position-41" style="font-size: 9.4358974358974pt;" aria-label="ubuntu (5 items)">ubuntu</a>
+<a href="https://vorkbaard.nl/tag/virtualbox/" class="tag-cloud-link tag-link-163 tag-link-position-42" style="font-size: 11.589743589744pt;" aria-label="virtualbox (7 items)">virtualbox</a>
+<a href="https://vorkbaard.nl/tag/vpn/" class="tag-cloud-link tag-link-25 tag-link-position-43" style="font-size: 9.4358974358974pt;" aria-label="vpn (5 items)">vpn</a>
+<a href="https://vorkbaard.nl/tag/wheezy/" class="tag-cloud-link tag-link-53 tag-link-position-44" style="font-size: 10.692307692308pt;" aria-label="wheezy (6 items)">wheezy</a>
+<a href="https://vorkbaard.nl/tag/windows/" class="tag-cloud-link tag-link-29 tag-link-position-45" style="font-size: 11.589743589744pt;" aria-label="windows (7 items)">windows</a></div>
+</div><div class="widget-area"><h3>Categories</h3>		<ul>
+				<li class="cat-item cat-item-16"><a href="https://vorkbaard.nl/category/scifi/">Scifi</a>
+</li>
+	<li class="cat-item cat-item-2"><a href="https://vorkbaard.nl/category/taal/">Taal</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="https://vorkbaard.nl/category/tech/" title="Technische documentatie van Kapitein Vorkbaards digitale avonturen">Tech</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="https://vorkbaard.nl/category/twitter/">Twitter</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://vorkbaard.nl/category/uncategorized/">Uncategorized</a>
+</li>
+		</ul>
+			</div><div class="widget-area"><h3>Archives</h3>		<ul>
+				<li><a href="https://vorkbaard.nl/2019/06/">June 2019</a></li>
+	<li><a href="https://vorkbaard.nl/2019/05/">May 2019</a></li>
+	<li><a href="https://vorkbaard.nl/2019/04/">April 2019</a></li>
+	<li><a href="https://vorkbaard.nl/2019/03/">March 2019</a></li>
+	<li><a href="https://vorkbaard.nl/2019/01/">January 2019</a></li>
+	<li><a href="https://vorkbaard.nl/2018/12/">December 2018</a></li>
+	<li><a href="https://vorkbaard.nl/2018/11/">November 2018</a></li>
+	<li><a href="https://vorkbaard.nl/2018/10/">October 2018</a></li>
+	<li><a href="https://vorkbaard.nl/2018/09/">September 2018</a></li>
+	<li><a href="https://vorkbaard.nl/2018/08/">August 2018</a></li>
+	<li><a href="https://vorkbaard.nl/2018/07/">July 2018</a></li>
+	<li><a href="https://vorkbaard.nl/2018/06/">June 2018</a></li>
+	<li><a href="https://vorkbaard.nl/2018/05/">May 2018</a></li>
+	<li><a href="https://vorkbaard.nl/2018/03/">March 2018</a></li>
+	<li><a href="https://vorkbaard.nl/2018/02/">February 2018</a></li>
+	<li><a href="https://vorkbaard.nl/2018/01/">January 2018</a></li>
+	<li><a href="https://vorkbaard.nl/2017/12/">December 2017</a></li>
+	<li><a href="https://vorkbaard.nl/2017/11/">November 2017</a></li>
+	<li><a href="https://vorkbaard.nl/2017/10/">October 2017</a></li>
+	<li><a href="https://vorkbaard.nl/2017/09/">September 2017</a></li>
+	<li><a href="https://vorkbaard.nl/2017/08/">August 2017</a></li>
+	<li><a href="https://vorkbaard.nl/2017/07/">July 2017</a></li>
+	<li><a href="https://vorkbaard.nl/2017/06/">June 2017</a></li>
+	<li><a href="https://vorkbaard.nl/2017/05/">May 2017</a></li>
+	<li><a href="https://vorkbaard.nl/2017/04/">April 2017</a></li>
+	<li><a href="https://vorkbaard.nl/2017/03/">March 2017</a></li>
+	<li><a href="https://vorkbaard.nl/2017/02/">February 2017</a></li>
+	<li><a href="https://vorkbaard.nl/2017/01/">January 2017</a></li>
+	<li><a href="https://vorkbaard.nl/2016/12/">December 2016</a></li>
+	<li><a href="https://vorkbaard.nl/2016/11/">November 2016</a></li>
+	<li><a href="https://vorkbaard.nl/2016/10/">October 2016</a></li>
+	<li><a href="https://vorkbaard.nl/2016/09/">September 2016</a></li>
+	<li><a href="https://vorkbaard.nl/2016/08/">August 2016</a></li>
+	<li><a href="https://vorkbaard.nl/2016/07/">July 2016</a></li>
+	<li><a href="https://vorkbaard.nl/2016/06/">June 2016</a></li>
+	<li><a href="https://vorkbaard.nl/2016/05/">May 2016</a></li>
+	<li><a href="https://vorkbaard.nl/2016/04/">April 2016</a></li>
+	<li><a href="https://vorkbaard.nl/2016/03/">March 2016</a></li>
+	<li><a href="https://vorkbaard.nl/2016/02/">February 2016</a></li>
+	<li><a href="https://vorkbaard.nl/2016/01/">January 2016</a></li>
+	<li><a href="https://vorkbaard.nl/2015/12/">December 2015</a></li>
+	<li><a href="https://vorkbaard.nl/2015/11/">November 2015</a></li>
+	<li><a href="https://vorkbaard.nl/2015/10/">October 2015</a></li>
+	<li><a href="https://vorkbaard.nl/2015/09/">September 2015</a></li>
+	<li><a href="https://vorkbaard.nl/2015/08/">August 2015</a></li>
+	<li><a href="https://vorkbaard.nl/2015/07/">July 2015</a></li>
+	<li><a href="https://vorkbaard.nl/2015/06/">June 2015</a></li>
+	<li><a href="https://vorkbaard.nl/2015/05/">May 2015</a></li>
+	<li><a href="https://vorkbaard.nl/2015/04/">April 2015</a></li>
+	<li><a href="https://vorkbaard.nl/2015/03/">March 2015</a></li>
+	<li><a href="https://vorkbaard.nl/2015/02/">February 2015</a></li>
+	<li><a href="https://vorkbaard.nl/2015/01/">January 2015</a></li>
+	<li><a href="https://vorkbaard.nl/2014/12/">December 2014</a></li>
+	<li><a href="https://vorkbaard.nl/2014/10/">October 2014</a></li>
+	<li><a href="https://vorkbaard.nl/2014/08/">August 2014</a></li>
+	<li><a href="https://vorkbaard.nl/2014/04/">April 2014</a></li>
+	<li><a href="https://vorkbaard.nl/2014/02/">February 2014</a></li>
+	<li><a href="https://vorkbaard.nl/2014/01/">January 2014</a></li>
+	<li><a href="https://vorkbaard.nl/2013/11/">November 2013</a></li>
+	<li><a href="https://vorkbaard.nl/2013/09/">September 2013</a></li>
+	<li><a href="https://vorkbaard.nl/2013/08/">August 2013</a></li>
+	<li><a href="https://vorkbaard.nl/2013/07/">July 2013</a></li>
+	<li><a href="https://vorkbaard.nl/2013/06/">June 2013</a></li>
+	<li><a href="https://vorkbaard.nl/2013/05/">May 2013</a></li>
+	<li><a href="https://vorkbaard.nl/2012/06/">June 2012</a></li>
+	<li><a href="https://vorkbaard.nl/2012/05/">May 2012</a></li>
+		</ul>
+			</div><div class="widget-area"><h3>Meta</h3>			<ul>
+						<li><a href="https://vorkbaard.nl/wp-login.php">Log in</a></li>
+			<li><a href="https://vorkbaard.nl/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://vorkbaard.nl/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+			</div></div><!--sidebar-->	<div class="clear"></div>
+	</div><!--.container-->
+
+	<div id="footer-shadow">
+	<div id="footer"><footer>
+		
+			<div id="footer-content">
+            
+            <div id="footer-widget">
+                <div id="footer-widget-left">
+                                                         </div>   
+               
+                
+                <div id="footer-widget-middle">
+                                                            
+                </div>
+                
+                <div id="footer-widget-right">
+                                                            
+                </div>
+                
+                </div>         
+            
+                          
+                        
+				<!--Wigitized Footer-->				
+                <div id="nav-footer" class="nav"><nav>
+					<div class="menu"><ul>
+<li class="page_item page-item-174"><a href="https://vorkbaard.nl/">Ahoy, maatjes!</a></li>
+<li class="page_item page-item-316"><a href="https://vorkbaard.nl/rent-a-beard/">Rent-a-beard</a></li>
+<li class="page_item page-item-168"><a href="https://vorkbaard.nl/scifi/">Scifi</a></li>
+</ul></div>
+				</nav></div><!--#nav-footer-->
+				
+				<p>© 2019 <a href="https://vorkbaard.nl/" title="Kapitein Vorkbaard to the rescue!">Vorkbaard uit de toekomst</a>. All Rights Reserved. <br> Theme by <a href="http://basweinans.nl/">Bas Weinans</a>. Powered by <a href="http://wordpress.org/">WordPress</a>.</p>
+				
+			</div><!--#footer-content-->
+		
+	</footer></div><!--#footer-->
+    </div><!--#footer-shadow-->
+</div><!--#main-->
+
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shCore.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushAS3.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushBash.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushColdFusion.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushClojure.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushCpp.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushCSharp.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushCss.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushDelphi.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushDiff.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushErlang.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushFSharp.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushGroovy.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushJava.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushJavaFX.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushJScript.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushLatex.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushMatlabKey.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushObjC.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushPerl.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushPhp.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushPlain.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushPowerShell.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushPython.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushR.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushRuby.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushScala.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushSql.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushVb.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/shBrushXml.js"></script>
+<script type="text/javascript">
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://vorkbaard.nl/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "https://vorkbaard.nl/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['wrap-lines'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/comment-reply.min.js"></script>
+<script type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/wp-embed.min.js"></script>
+<script async="async" type="text/javascript" src="./How to set up a VirtualBox server in Debian 9_ web interface, autostart, backup _ Vorkbaard uit de toekomst_files/form.js"></script>
+
+
+</body></html>

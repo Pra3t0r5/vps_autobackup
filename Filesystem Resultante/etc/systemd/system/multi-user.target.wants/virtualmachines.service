@@ -1,0 +1,12 @@
+[Unit]
+Description=Save VirtualBox VMs before shutdown or reboot; resume them after boot.
+Wants=multi-user.target
+After=multi-user.target
+ 
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/sudo -u vps /home/vps/resumevms.sh
+ExecStop=/usr/bin/sudo -u vps /home/vps/pausevms.sh
+[Install]
+WantedBy=multi-user.target
